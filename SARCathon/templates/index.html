@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart FAQ Module</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Smart FAQ Module</h1>
+    <input type="text" id="query" placeholder="Ask a question..." />
+    <button onclick="searchFaq()">Search</button>
+    <div id="results"></div>
+
+    <script>
+        async function searchFaq() {
+            const query = document.getElementById('query').value;
+            const response = await fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: query })
+            });
+            const faqs = await response.json();
+            displayResults(faqs);
+        }
+
+        function displayResults(faqs) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+            if (faqs.length === 0) {
+                resultsDiv.innerHTML = '<p>No matching FAQs found.</p>';
+            } else {
+                faqs.forEach(faq => {
+                    const faqDiv = document.createElement('div');
+                    faqDiv.innerHTML = `<h3>${faq.question}</h3><p>${faq.answer}</p>`;
+                    resultsDiv.appendChild(faqDiv);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

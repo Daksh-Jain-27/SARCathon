@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+}
+
+input {
+    width: 300px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 15px;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+h3 {
+    margin: 10px 0 5px;
+}
+
+p {
+    margin: 0 0 20px;
+}
